@@ -1,0 +1,82 @@
+body {
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    gap: 15px;
+}
+
+input {
+    padding: 12px;
+    border: 1px solid #cccccc; 
+    border-radius: 4px; 
+    font-size: 16px; 
+}
+
+button {
+    padding: 12px;
+    background-color: #007BFF; 
+    color: white; 
+    border: none; 
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease;
+}
+button:hover {
+    background-color: #0056b3;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333333;
+}
+
+img {
+    width: 250px; 
+    align-self: center;
+    margin-bottom: 25px; 
+}
+
+a {
+    text-align: center;
+    text-decoration: none; 
+    color: #007BFF; 
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px; 
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3; 
+}
+
+
+.lembrar-senha {
+    display: flex;
+    align-items: center; 
+    gap: 8px; 
+}
+
+
+.lembrar-senha label {
+    font-weight: normal;
+    color: #555555;
+}

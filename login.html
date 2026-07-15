@@ -3,17 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Login - Biblioteca</title>
 </head>
+
 <body>
    <h1><strong>Bem-vindo ao sistema de gerenciador de blibiotecas</strong></h1>
-   <h2>Sistema inteligênte de gestor blibliotecário</h2>
+   <h2>Sistema Inteligênte de Gestor Blibliotecário</h2>
    <form>
+    <img src="Imagem/Logo app.png" alt="Logótipo da Biblioteca Escolar">
    <label for="login_usuario">LOGIN DE USUÁRIO</label>
     <input type="text" id="login_usuario" name="login_usuario" required>
    <label for="senha_acesso">SENHA DE ACESSO</label>
     <input type="password" id="senha_acesso" name="senha_login" required>
-   <button>ACESSAR PAINEL</button>
+    <div class="lembrar-senha">
+    <input type="checkbox" id="lembrar" name="lembrar">
+    <label for="lembrar">Lembrar de mim</label>
+    </div>
+   <button id="botao_login">ACESSAR PAINEL</button>
+   <a href="#">Esqueci minha senha</a>
    </form>
+   <script src="login.js"></script>
+</body>
 </body>
 </html>
