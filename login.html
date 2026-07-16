@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Biblioteca Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center font-sans p-4">
+
+    <div class="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md">
+        
+        <div class="flex justify-center mb-8">
+            <img src="Imagem/Logo app.png" alt="Logo Biblioteca" class="w-[320px] mx-auto">
+        </div>
+
+        <h2 class="text-center text-gray-500 text-base mb-8">Insira suas credenciais para acessar o painel</h2>
+
+        <form class="space-y-5">
+            
+            <div>
+                <label for="login_usuario" class="block text-sm font-medium text-gray-700 mb-1">Usuário</label>
+                <input type="text" id="login_usuario" placeholder="Digite seu usuário" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+            </div>
+
+            <div>
+                <label for="senha_acesso" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                <div class="relative">
+                    <input type="password" id="senha_acesso" placeholder="••••••••" 
+                        class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                    
+                    <button type="button" id="toggle_senha" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg id="icone_olho" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-2 mt-4">
+                <div class="flex items-center">
+                    <input type="checkbox" id="lembrar" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                    <label for="lembrar" class="ml-2 block text-sm text-gray-700">Lembrar de mim</label>
+                </div>
+                <div class="text-sm">
+                    <a href="#" id="link_esqueci_senha" class="font-medium text-blue-600 hover:text-blue-500 hover:underline">Esqueci a senha</a>
+                </div>
+            </div>
+
+            <div id="mensagem_alerta" class="hidden"></div>
+
+            <button type="button" id="botao_login" 
+                class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all shadow-md mt-6 text-lg flex justify-center items-center">
+                Acessar Painel
+            </button>
+            
+        </form>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
