@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Categorias - Biblioteca Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 min-h-screen font-sans p-4 md:p-8 flex items-start justify-center relative">
+
+    <div class="bg-white/80 backdrop-blur-xl rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 w-full max-w-4xl p-8 md:p-12 mt-4 md:mt-10">
+        
+        <div class="mb-10 flex items-center justify-between border-b border-indigo-100/50 pb-6">
+            <div>
+                <h2 class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-900 to-slate-800 tracking-tight">Gerenciar Categorias</h2>
+                <p class="text-slate-500 text-sm mt-2 font-medium">Crie, edite ou remova as categorias oficiais do acervo.</p>
+            </div>
+            <a href="cadastro-livros.html" class="text-indigo-600 hover:text-indigo-800 font-bold text-sm flex items-center transition-colors bg-white/50 px-4 py-2 rounded-full hover:bg-white shadow-sm border border-indigo-50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 mr-1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" /></svg>
+                Voltar ao Cadastro
+            </a>
+        </div>
+
+        <div class="bg-gradient-to-r from-indigo-50 to-violet-50/50 p-6 rounded-2xl border border-indigo-100/50 mb-10 shadow-inner">
+            <h3 class="text-lg font-bold text-indigo-900 mb-4 flex items-center">
+                <div class="p-2 bg-indigo-100 rounded-lg mr-3 text-indigo-600 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                Adicionar Nova Categoria
+            </h3>
+            <form id="form_categoria" class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="input_nova_categoria" placeholder="Ex: Biografias" class="w-full px-5 py-3 border border-indigo-200/60 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-white/70 backdrop-blur-sm shadow-sm font-medium placeholder-slate-400">
+                
+                <button type="submit" class="w-full sm:w-auto whitespace-nowrap px-8 py-3 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold rounded-xl hover:from-indigo-700 hover:to-violet-700 transition-all shadow-lg shadow-indigo-500/30 transform hover:-translate-y-0.5">Salvar Categoria</button>
+            </form>
+            <div id="alerta_erro" class="hidden mt-4 bg-red-50 text-red-600 border border-red-200 px-4 py-3 rounded-xl text-sm font-semibold flex items-center transition-all">
+                <span id="texto_alerta">Erro</span>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-lg font-bold text-slate-800 mb-4">Categorias Cadastradas</h3>
+            <div class="border border-slate-200/60 rounded-2xl overflow-hidden bg-white/40 shadow-sm">
+                <div class="grid grid-cols-12 gap-4 bg-slate-50/50 p-4 border-b border-slate-200/60 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                    <div class="col-span-6 md:col-span-8">Nome da Categoria</div>
+                    <div class="col-span-3 md:col-span-2 text-center">Status</div>
+                    <div class="col-span-3 md:col-span-2 text-center">Ações</div>
+                </div>
+                <div id="lista_categorias"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="janela_modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full mx-4 transform transition-all border border-white">
+            <h3 id="modal_titulo" class="text-xl font-extrabold text-slate-800 mb-2">Atenção</h3>
+            <p id="modal_mensagem" class="text-slate-500 mb-6 text-sm font-medium">Mensagem do sistema.</p>
+            <input type="text" id="modal_input" class="w-full px-4 py-3 border border-slate-200 rounded-xl hidden mb-6 focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-slate-50 font-medium">
+            <div class="flex justify-end space-x-3">
+                <button id="modal_btn_cancelar" class="px-5 py-2.5 text-slate-600 font-bold hover:bg-slate-100 rounded-xl transition-colors">Cancelar</button>
+                <button id="modal_btn_confirmar" class="px-5 py-2.5 text-white font-bold rounded-xl transition-colors shadow-md">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/categorias.js"></script>
+</body>
+</html>

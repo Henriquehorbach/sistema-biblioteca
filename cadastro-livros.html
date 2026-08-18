@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Livros - Biblioteca Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 min-h-screen font-sans p-4 md:p-8 flex items-center justify-center relative">
+
+    <div class="bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
+        
+        <div class="w-full md:w-2/5 bg-gradient-to-b from-indigo-50/30 to-purple-50/30 p-8 border-r border-indigo-100/50 flex flex-col items-center justify-center relative">
+            <div class="mb-8 w-full flex justify-center">
+                <img src="Imagem/Logo app.png" alt="Logo Biblioteca" class="w-[180px] drop-shadow-sm">
+            </div>
+
+            <div id="area_vazia" class="w-full max-w-sm aspect-[2/3] border-2 border-dashed border-indigo-200 rounded-[2rem] p-6 flex flex-col items-center justify-center bg-white/50 shadow-sm transition-all hover:bg-white hover:border-indigo-400 group">
+                <div class="p-4 bg-indigo-100/50 rounded-full mb-4 text-indigo-500 group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                    </svg>
+                </div>
+                <p class="text-lg font-bold text-slate-700 text-center mb-1">Capa da Obra</p>
+                <p class="text-xs text-slate-500 text-center mb-6 px-2 font-medium">Buscada via API ou anexe manualmente</p>
+                
+                <div class="flex flex-col gap-3 w-full">
+                    <label for="upload_capa" class="w-full text-center py-2.5 px-4 bg-white hover:bg-slate-50 text-slate-700 font-bold rounded-xl cursor-pointer transition-colors border border-slate-200 shadow-sm text-sm">
+                        Procurar Arquivo
+                    </label>
+                    <input type="file" id="upload_capa" class="hidden" accept="image/*">
+                    
+                    <button type="button" id="btn_abrir_webcam" class="w-full py-2.5 px-4 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-xl transition-colors border border-indigo-200 text-sm flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        Tirar Foto
+                    </button>
+                </div>
+            </div>
+
+            <div id="area_preview" class="hidden w-full max-w-sm aspect-[2/3] rounded-[2rem] overflow-hidden shadow-xl shadow-indigo-900/10 border-4 border-white relative group">
+                <img id="imagem_padronizada" src="" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
+                    <button type="button" id="btn_remover_foto" class="bg-rose-500 text-white p-3.5 rounded-full hover:bg-rose-600 shadow-lg transform hover:scale-110 transition-all" title="Remover Capa">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full md:w-3/5 p-10 md:p-14">
+            
+            <div class="mb-8 border-b border-indigo-100/50 pb-6">
+                <h2 class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-900 to-slate-800 tracking-tight">Novo Livro</h2>
+                <p class="text-slate-500 text-sm mt-2 font-medium">Bipe o código de barras para preenchimento mágico.</p>
+            </div>
+
+            <form id="form_livro" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="md:col-span-2">
+                        <label for="codigo_barras" class="block text-sm font-bold text-slate-700 mb-1">Código ISBN <span class="text-rose-500">*</span></label>
+                        <div class="flex gap-2">
+                            <div class="relative flex-grow">
+            
+                                <div class="absolute z-10 inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-indigo-400"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875h1.5v14.25h-1.5V4.875zM7.125 4.875h1.5v14.25h-1.5V4.875zM10.875 4.875h2.25v14.25h-2.25V4.875zM15.375 4.875h1.5v14.25h-1.5V4.875zM18.75 4.875h1.5v14.25h-1.5V4.875z" /></svg></div>
+                                <input type="text" id="codigo_barras" placeholder="Bipe aqui..." class="w-full pl-11 pr-4 py-3.5 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-mono text-lg bg-white/70 backdrop-blur-sm shadow-sm">
+                            </div>
+                            <button type="button" id="btn_buscar_isbn" class="bg-slate-800 hover:bg-slate-900 text-white px-7 rounded-xl font-bold transition-all shadow-lg shadow-slate-900/20 flex items-center justify-center whitespace-nowrap transform hover:-translate-y-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                                Buscar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="titulo" class="block text-sm font-bold text-slate-700 mb-1">Título da Obra <span class="text-rose-500">*</span></label>
+                        <div class="relative">
+                           
+                            <div class="absolute z-10 inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-indigo-400"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg></div>
+                            <input type="text" id="titulo" placeholder="Ex: Hábitos Atômicos" class="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-white/70 backdrop-blur-sm shadow-sm font-medium">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="autor" class="block text-sm font-bold text-slate-700 mb-1">Autor <span class="text-rose-500">*</span></label>
+                        <div class="relative">
+
+                            <div class="absolute z-10 inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-indigo-400"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg></div>
+                            <input type="text" id="autor" placeholder="Ex: James Clear" class="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-white/70 backdrop-blur-sm shadow-sm font-medium">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-end mb-1">
+                            <label for="select_categoria" class="block text-sm font-bold text-slate-700">Gêneros</label>
+                            <a href="categorias.html" class="text-xs text-indigo-600 hover:text-indigo-800 font-bold hover:underline flex items-center transition-colors">Nova Categoria</a>
+                        </div>
+                        <div class="relative">
+                    
+                            <div class="absolute z-10 inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-indigo-400"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" /></svg></div>
+                            <select id="select_categoria" class="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-white/70 backdrop-blur-sm shadow-sm font-medium appearance-none"></select>
+                        </div>
+                        <div id="container_tags" class="flex flex-wrap gap-2 mt-3"></div>
+                    </div>
+
+                    <div>
+                        <label for="ano" class="block text-sm font-bold text-slate-700 mb-1">Ano</label>
+                        <div class="relative">
+                         
+                            <div class="absolute z-10 inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-indigo-400"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg></div>
+                            <input type="number" id="ano" placeholder="2023" class="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-white/70 backdrop-blur-sm shadow-sm font-medium">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="quantidade" class="block text-sm font-bold text-slate-700 mb-1">Estoque</label>
+                        <div class="relative">
+
+                            <div class="absolute z-10 inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-indigo-400"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6z" /></svg></div>
+                            <input type="number" id="quantidade" placeholder="5" class="w-full pl-11 pr-4 py-3 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-white/70 backdrop-blur-sm shadow-sm font-medium">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4 mt-10 pt-6 border-t border-indigo-50">
+                    <button type="reset" class="w-full sm:w-auto px-8 py-3.5 border border-slate-200 text-slate-600 font-bold rounded-xl hover:bg-slate-50 focus:outline-none transition-all shadow-sm">Limpar</button>
+
+                    <button type="button" id="btn_salvar_livro" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold rounded-xl hover:from-indigo-700 hover:to-violet-700 focus:outline-none transition-all shadow-lg shadow-indigo-500/30 flex items-center justify-center transform hover:-translate-y-0.5">
+                        <svg class="w-6 h-6 mr-2 drop-shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                        Salvar no Acervo
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="janela_aviso" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center z-[60] transition-opacity">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full mx-4 transform transition-all text-center border border-white">
+            <div id="icone_aviso" class="mx-auto flex items-center justify-center h-16 w-16 rounded-2xl mb-5 shadow-sm transform -rotate-3"></div>
+            <h3 id="titulo_aviso" class="text-xl font-extrabold text-slate-800 mb-2">Atenção</h3>
+            <p id="texto_aviso" class="text-slate-500 mb-8 text-sm font-medium">Mensagem</p>
+            <button type="button" id="btn_fechar_aviso" class="w-full px-5 py-3.5 text-white font-bold rounded-xl transition-all shadow-md transform hover:-translate-y-0.5">Entendi</button>
+        </div>
+    </div>
+
+    <div id="modal_camera" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md hidden flex flex-col items-center justify-center z-50">
+        <h3 class="text-white text-2xl font-extrabold mb-6 tracking-tight">Enquadre o Livro na Guia</h3>
+        <div class="relative w-full max-w-sm aspect-[2/3] bg-black rounded-[2rem] overflow-hidden shadow-2xl border border-white/20">
+            <video id="video_webcam" class="w-full h-full object-cover" autoplay playsinline></video>
+            <div class="absolute inset-0 pointer-events-none flex items-center justify-center border-[40px] border-black/70 backdrop-blur-[2px]">
+                <div class="w-full h-full border-2 border-dashed border-white/80 rounded-xl"></div>
+            </div>
+        </div>
+        <div class="flex space-x-4 mt-8">
+            <button type="button" id="btn_cancelar_camera" class="px-8 py-3.5 bg-white/10 text-white font-bold rounded-xl hover:bg-white/20 transition-all border border-white/20 backdrop-blur-sm">Cancelar</button>
+            <button type="button" id="btn_bater_foto" class="px-8 py-3.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold rounded-xl hover:from-indigo-600 hover:to-violet-600 shadow-lg shadow-indigo-500/50 flex items-center transition-all transform hover:-translate-y-1">
+                <svg class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /></svg>
+                Capturar
+            </button>
+        </div>
+        <canvas id="canvas_foto" class="hidden"></canvas>
+    </div>
+
+    <script src="js/cadastro-livros.js"></script>
+</body>
+</html>
