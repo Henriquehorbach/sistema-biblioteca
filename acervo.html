@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acervo - Biblioteca Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 min-h-screen font-sans p-4 md:p-8 relative">
+
+  
+    <header class="w-full max-w-7xl mx-auto mt-6 md:mt-10 mb-8 flex flex-col md:flex-row justify-between items-center bg-white/80 backdrop-blur-md p-4 md:px-6 md:py-4 rounded-3xl shadow-sm border border-white/50">
+        <div class="flex items-center mb-4 md:mb-0 px-2">
+            
+            <img src="Imagem/Logo app.png" alt="Logo" class="h-14 w-auto object-contain mr-4 drop-shadow-sm">
+            <div>
+                <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight">Catálogo de Livros</h1>
+                <p class="text-xs font-bold text-indigo-500 uppercase tracking-wider">Visão Geral do Acervo</p>
+            </div>
+        </div>
+        <div class="flex space-x-3">
+            <a href="cadastro-livros.html" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 transform hover:-translate-y-0.5 transition-all flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 mr-2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                Novo Livro
+            </a>
+        </div>
+    </header>
+    
+    <main class="w-full max-w-7xl mx-auto bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 p-8 md:p-10">
+        
+        
+        <div class="flex flex-col xl:flex-row gap-4 mb-10 items-center justify-between">
+           
+            <div class="relative w-full xl:w-2/5">
+                <div class="absolute z-10 inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-indigo-400"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                </div>
+                <input type="text" id="input_pesquisa" placeholder="Buscar título, autor, ISBN..." class="w-full pl-12 pr-4 py-4 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-white/70 backdrop-blur-sm shadow-sm font-medium text-sm md:text-base">
+            </div>
+          
+            <div class="flex w-full xl:w-auto flex-wrap gap-3">
+                
+                <select id="filtro_categoria" class="flex-grow md:flex-none pl-4 pr-10 py-4 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-white/70 backdrop-blur-sm shadow-sm font-bold text-sm cursor-pointer">
+                    <option value="todos">Todos os Gêneros</option>
+                    <option value="Ficção">Ficção</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Negócios">Negócios</option>
+                    <option value="Fantasia">Fantasia</option>
+                </select>
+
+                <select id="filtro_ordenacao" class="flex-grow md:flex-none pl-4 pr-10 py-4 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-white/70 backdrop-blur-sm shadow-sm font-bold text-sm cursor-pointer">
+                    <option value="recente">Adicionados Recentemente</option>
+                    <option value="az">Ordem Alfabética (A-Z)</option>
+                    <option value="za">Ordem Alfabética (Z-A)</option>
+                    <option value="estoque_maior">Maior Estoque</option>
+                </select>
+
+                <div class="flex items-center p-1 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner">
+                    <button id="btn_grid" onclick="mudarVisualizacao('grid')" class="p-3 bg-white text-indigo-600 rounded-xl shadow-sm transition-all" title="Visualização em Grade">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+                    </button>
+                    <button id="btn_lista" onclick="mudarVisualizacao('lista')" class="p-3 text-slate-400 hover:text-indigo-600 rounded-xl transition-all" title="Visualização em Lista">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="grade_livros" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 transition-all">
+        </div>
+
+        <div id="paginacao" class="mt-12 flex justify-center items-center space-x-2">
+        </div>
+    </main>
+
+    <div id="modal_excluir" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white/90 backdrop-blur-xl border border-white/60 rounded-[2rem] p-8 max-w-sm w-full shadow-2xl transform scale-95 transition-all duration-300" id="modal_excluir_conteudo">
+            <div class="w-16 h-16 bg-rose-100 text-rose-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 text-center mb-2">Excluir Livro?</h3>
+            <p class="text-slate-500 text-center text-sm mb-8">Tem certeza que deseja excluir <span id="nome_livro_excluir" class="font-bold text-slate-700"></span>? Esta ação não pode ser desfeita.</p>
+            <div class="flex space-x-3">
+                <button onclick="fecharModalExcluir()" class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-colors">Cancelar</button>
+                <button onclick="confirmarExclusao()" class="flex-1 py-3 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-xl shadow-lg shadow-rose-500/30 transition-colors">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal_editar" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white/90 backdrop-blur-xl border border-white/60 rounded-[2rem] p-8 max-w-sm w-full shadow-2xl transform scale-95 transition-all duration-300" id="modal_editar_conteudo">
+            <div class="w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 text-center mb-2">Ação de Editar</h3>
+            <p class="text-slate-500 text-center text-sm mb-8">Esta ação abrirá o formulário para editar os dados de <span id="nome_livro_editar" class="font-bold text-indigo-600"></span>.</p>
+            <div class="flex space-x-3">
+                <button onclick="fecharModalEditar()" class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-colors">Cancelar</button>
+                <button onclick="window.location.href='cadastro-livros.html'" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 transition-colors">Editar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/acervo.js"></script>
+</body>
+</html>
