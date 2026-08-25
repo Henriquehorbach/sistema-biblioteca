@@ -6,7 +6,7 @@ const caixaMensagem = document.getElementById('mensagem_alerta');
 const toggleSenha = document.getElementById('toggle_senha');
 const iconeOlho = document.getElementById('icone_olho');
 
-
+// A mágica de revelar/ocultar a senha (já estava excelente, mantive intacta!)
 toggleSenha.addEventListener('click', function() {
     if (campoSenha.type === 'password') {
         campoSenha.type = 'text'; 
@@ -19,10 +19,11 @@ toggleSenha.addEventListener('click', function() {
 });
 
 botao.addEventListener('click', function(evento) {
-    evento.preventDefault();
+    evento.preventDefault(); // Impede a página de recarregar
 
-    caixaMensagem.classList.add('hidden');
+    caixaMensagem.classList.add('hidden'); // Esconde mensagens antigas
     
+    // Efeito visual de carregamento no botão
     const textoOriginal = botao.innerText;
     botao.innerHTML = `
         <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -34,24 +35,42 @@ botao.addEventListener('click', function(evento) {
     botao.disabled = true; 
     botao.classList.add('opacity-80', 'cursor-not-allowed');
 
+    // Simula o tempo que o servidor levaria para responder (1.5 segundos)
     setTimeout(function() {
         
+        // Devolve o botão ao normal
         botao.innerText = textoOriginal;
         botao.disabled = false;
         botao.classList.remove('opacity-80', 'cursor-not-allowed');
 
-        if (campoUsuario.value === '' || campoSenha.value === '') {
-            caixaMensagem.className = 'w-full text-center p-3 rounded-lg text-sm font-semibold mb-4 bg-red-50 text-red-600 border border-red-200 transition-all block';
-            caixaMensagem.innerText = 'Atenção: Por favor, preencha o Usuário e a Senha!';
+        const usuarioDigitado = campoUsuario.value.trim();
+        const senhaDigitada = campoSenha.value.trim();
+
+        // VALIDAÇÃO REAL AQUI:
+        if (usuarioDigitado === '' || senhaDigitada === '') {
+            caixaMensagem.className = 'w-full text-center p-3 rounded-xl text-sm font-bold mb-4 bg-rose-50 text-rose-600 border border-rose-200 transition-all block shadow-sm';
+            caixaMensagem.innerText = '⚠️ Por favor, preencha o Usuário e a Senha!';
+        
+        } else if (usuarioDigitado === 'admin' && senhaDigitada === '1234') {
+            // SUCESSO!
+            caixaMensagem.className = 'w-full text-center p-3 rounded-xl text-sm font-bold mb-4 bg-emerald-50 text-emerald-600 border border-emerald-200 transition-all block shadow-sm';
+            caixaMensagem.innerText = '✅ Login aprovado! Redirecionando...';
+            
+            // Joga o usuário para o Acervo automaticamente após 1 segundinho
+            setTimeout(() => {
+                window.location.href = 'acervo.html';
+            }, 1000);
+
         } else {
-            caixaMensagem.className = 'w-full text-center p-3 rounded-lg text-sm font-semibold mb-4 bg-green-50 text-green-600 border border-green-200 transition-all block';
-            caixaMensagem.innerText = 'Sucesso! O sistema fará o redirecionamento para o Painel.';
+            // ERRO DE CREDENCIAIS!
+            caixaMensagem.className = 'w-full text-center p-3 rounded-xl text-sm font-bold mb-4 bg-rose-50 text-rose-600 border border-rose-200 transition-all block shadow-sm';
+            caixaMensagem.innerText = '❌ Usuário ou senha incorretos.';
         }
     }, 1500); 
 });
 
 linkEsqueciSenha.addEventListener('click', function(evento) {
     evento.preventDefault();
-    caixaMensagem.className = 'w-full text-center p-3 rounded-lg text-sm font-semibold mb-4 bg-blue-50 text-blue-600 border border-blue-200 transition-all block';
-    caixaMensagem.innerText = 'Instruções de recuperação enviadas para o e-mail cadastrado.';
+    caixaMensagem.className = 'w-full text-center p-3 rounded-xl text-sm font-bold mb-4 bg-indigo-50 text-indigo-600 border border-indigo-200 transition-all block shadow-sm';
+    caixaMensagem.innerText = '📧 Instruções de recuperação enviadas para o seu e-mail.';
 });
