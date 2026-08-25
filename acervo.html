@@ -9,12 +9,11 @@
 </head>
 <body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 min-h-screen font-sans p-4 md:p-8 relative">
 
-  
     <header class="w-full max-w-7xl mx-auto mt-6 md:mt-10 mb-8 flex flex-col md:flex-row justify-between items-center bg-white/80 backdrop-blur-md p-4 md:px-6 md:py-4 rounded-3xl shadow-sm border border-white/50">
-        <div class="flex items-center mb-4 md:mb-0 px-2">
-            
-            <img src="Imagem/Logo app.png" alt="Logo" class="h-14 w-auto object-contain mr-4 drop-shadow-sm">
-            <div>
+        <div class="flex items-center justify-center md:justify-start mb-4 md:mb-0 px-2">
+            <!-- LOGO CORRIGIDO AQUI (h-20 e alinhamento) -->
+            <img src="Imagem/Logo app.png" alt="Logo" class="h-20 w-auto object-contain mr-4 drop-shadow-sm" onerror="this.style.display='none'">
+            <div class="flex flex-col justify-center">
                 <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight">Catálogo de Livros</h1>
                 <p class="text-xs font-bold text-indigo-500 uppercase tracking-wider">Visão Geral do Acervo</p>
             </div>
@@ -29,9 +28,7 @@
     
     <main class="w-full max-w-7xl mx-auto bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 p-8 md:p-10">
         
-        
         <div class="flex flex-col xl:flex-row gap-4 mb-10 items-center justify-between">
-           
             <div class="relative w-full xl:w-2/5">
                 <div class="absolute z-10 inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-indigo-400"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
@@ -40,7 +37,6 @@
             </div>
           
             <div class="flex w-full xl:w-auto flex-wrap gap-3">
-                
                 <select id="filtro_categoria" class="flex-grow md:flex-none pl-4 pr-10 py-4 border border-slate-200 rounded-2xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all bg-white/70 backdrop-blur-sm shadow-sm font-bold text-sm cursor-pointer">
                     <option value="todos">Todos os Gêneros</option>
                     <option value="Ficção">Ficção</option>
@@ -68,6 +64,79 @@
         </div>
 
         <div id="grade_livros" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 transition-all">
+            
+            <!-- Livro 1: DISPONÍVEL -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 hover:shadow-md transition-shadow flex flex-col h-full relative overflow-hidden">
+                <div class="h-48 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl mb-4 flex items-center justify-center text-indigo-300">
+                    <svg class="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 leading-tight mb-1">O Senhor dos Anéis</h3>
+                <p class="text-sm font-medium text-slate-500 mb-4">J.R.R. Tolkien</p>
+                <div class="mt-auto">
+                    <p class="text-xs text-slate-400 font-bold mb-2">Cód: 987654321</p>
+                    <div class="inline-flex items-center w-full justify-center bg-emerald-50 text-emerald-600 border border-emerald-100 font-bold text-sm px-3 py-2 rounded-xl">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2"></span>
+                        Disponível na Prateleira
+                    </div>
+                </div>
+            </div>
+
+            <!-- Livro 2: EMPRESTADO -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 hover:shadow-md transition-shadow flex flex-col h-full relative overflow-hidden">
+                <div class="h-48 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl mb-4 flex items-center justify-center text-slate-300 opacity-60">
+                    <svg class="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 leading-tight mb-1">Harry Potter</h3>
+                <p class="text-sm font-medium text-slate-500 mb-4">J.K. Rowling</p>
+                <div class="mt-auto">
+                    <p class="text-xs text-slate-400 font-bold mb-2">Cód: 123456789</p>
+                    <div class="flex flex-col bg-rose-50 border border-rose-100 rounded-xl p-2 text-center">
+                        <div class="inline-flex items-center justify-center text-rose-600 font-bold text-sm mb-1">
+                            <span class="w-2 h-2 rounded-full bg-rose-500 mr-2"></span>
+                            Emprestado
+                        </div>
+                        <span class="text-[11px] font-semibold text-rose-400">Retorna em: 30/08/2026</span>
+                        <span class="text-[10px] font-bold text-slate-400 mt-1">Com: Lucas Gabriel</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Livro 3: DISPONÍVEL -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 hover:shadow-md transition-shadow flex flex-col h-full relative overflow-hidden">
+                <div class="h-48 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl mb-4 flex items-center justify-center text-indigo-300">
+                    <svg class="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 leading-tight mb-1">O Pequeno Príncipe</h3>
+                <p class="text-sm font-medium text-slate-500 mb-4">Antoine de Saint-Exupéry</p>
+                <div class="mt-auto">
+                    <p class="text-xs text-slate-400 font-bold mb-2">Cód: 456123789</p>
+                    <div class="inline-flex items-center w-full justify-center bg-emerald-50 text-emerald-600 border border-emerald-100 font-bold text-sm px-3 py-2 rounded-xl">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2"></span>
+                        Disponível na Prateleira
+                    </div>
+                </div>
+            </div>
+
+            <!-- Livro 4: ATRASADO -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 hover:shadow-md transition-shadow flex flex-col h-full relative overflow-hidden">
+                <div class="h-48 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl mb-4 flex items-center justify-center text-slate-300 opacity-60">
+                    <svg class="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 leading-tight mb-1">Dom Casmurro</h3>
+                <p class="text-sm font-medium text-slate-500 mb-4">Machado de Assis</p>
+                <div class="mt-auto">
+                    <p class="text-xs text-slate-400 font-bold mb-2">Cód: 789456123</p>
+                    <div class="flex flex-col bg-amber-50 border border-amber-200 rounded-xl p-2 text-center">
+                        <div class="inline-flex items-center justify-center text-amber-600 font-bold text-sm mb-1">
+                            <svg class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            Devolução Atrasada
+                        </div>
+                        <span class="text-[11px] font-semibold text-amber-500">Deveria ter voltado: 20/08</span>
+                        <span class="text-[10px] font-bold text-slate-400 mt-1">Com: Maria Clara</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div id="paginacao" class="mt-12 flex justify-center items-center space-x-2">
