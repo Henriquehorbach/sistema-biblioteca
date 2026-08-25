@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Leitores - Biblioteca Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Biblioteca Flatpickr para um Calendário Bonito -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Ajuste fino para o calendário combinar com o design do proejto*/
+        .flatpickr-calendar {
+            border-radius: 1.5rem !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+            border: 1px solid #e2e8f0 !important;
+            padding: 10px !important;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 min-h-screen p-4 md:p-8 relative">
+
+    <!-- Header Simples -->
+    <header class="w-full max-w-4xl mx-auto mt-2 md:mt-4 mb-8 flex flex-col md:flex-row justify-between items-center bg-white/80 backdrop-blur-md p-4 md:px-6 md:py-4 rounded-3xl shadow-sm border border-white/50">
+        <div class="flex items-center mb-4 md:mb-0 px-2">
+            <!-- Logo -->
+            <img src="Imagem/Logo app.png" alt="Logo" class="h-20 w-auto object-contain mr-4 drop-shadow-sm" onerror="this.style.display='none'">
+            <div>
+                <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight">Novo Leitor</h1>
+                <p class="text-xs font-bold text-indigo-500 uppercase tracking-wider">Gestão de Alunos</p>
+            </div>
+        </div>
+        <div>
+            <a href="acervo.html" class="text-slate-500 hover:text-indigo-600 font-bold px-4 py-2 transition-colors flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 mr-2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" /></svg>
+                Voltar
+            </a>
+        </div>
+    </header>
+
+    <!-- Formulário Principal -->
+    <main class="w-full max-w-4xl mx-auto">
+        <div class="bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-white/60 p-8 md:p-12">
+            
+            <form id="form_leitor" class="w-full flex flex-col">
+                
+                <div class="mb-8 border-b border-slate-200/60 pb-4">
+                    <h2 class="text-lg font-bold text-slate-800">Informações Cadastrais</h2>
+                    <p class="text-sm text-slate-500">Preencha os dados do aluno/leitor. Campos com asterisco (*) são obrigatórios.</p>
+                </div>
+
+                <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="col-span-1 md:col-span-2">
+                        <label class="block text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2">Nome Completo *</label>
+                        <input type="text" id="nome_leitor" placeholder="Ex: Lucas Gabriel da Silva" class="w-full bg-white/60 border border-slate-200 text-slate-800 rounded-2xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-medium">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2">RA / Matrícula (Código Único) *</label>
+                        <input type="text" id="documento_leitor" placeholder="Ex: 2024001" class="w-full bg-white/60 border border-slate-200 text-slate-800 rounded-2xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-medium">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2">Turma / Ano *</label>
+                        <input type="text" id="turma_leitor" placeholder="Ex: 8º Ano B / Manhã" class="w-full bg-white/60 border border-slate-200 text-slate-800 rounded-2xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-medium">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2">Data de Nascimento *</label>
+                        <div class="relative">
+                            <input type="text" id="nascimento_leitor" placeholder="Selecione a data..." class="w-full bg-white/60 border border-slate-200 text-slate-800 rounded-2xl pl-4 pr-12 py-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-medium cursor-pointer">
+                            <!-- Ícone de Calendário Customizado -->
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Status movido para cá para ficar junto aos dados principais -->
+                    <div>
+                        <label class="block text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2">Status do Leitor *</label>
+                        <select id="status_leitor" class="w-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold rounded-2xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all cursor-pointer">
+                            <option value="ativo">🟢 Ativo (Liberado)</option>
+                            <option value="bloqueado" class="text-rose-600">🔴 Bloqueado (Pendências)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2">Telefone (Opcional)</label>
+                        <input type="text" id="telefone_leitor" placeholder="(11) 98765-4321" class="w-full bg-white/60 border border-slate-200 text-slate-800 rounded-2xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-medium">
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <div class="col-span-1 md:col-span-2 flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4 mt-6 pt-6 border-t border-slate-200/60">
+                        <button type="reset" class="w-full sm:w-auto px-6 py-3.5 bg-white border-2 border-slate-200 text-slate-600 font-bold rounded-2xl hover:bg-slate-50 hover:text-slate-800 transition-all text-center">
+                            Limpar Dados
+                        </button>
+                        <button type="button" onclick="salvarLeitor()" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transform hover:-translate-y-0.5 transition-all text-center">
+                            Salvar Leitor
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Modal de Alerta Customizado -->
+    <div id="modal_alerta" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="fecharModal()"></div>
+        <div id="modal_conteudo" class="relative bg-white/90 backdrop-blur-xl rounded-[2.5rem] p-8 max-w-sm w-full mx-4 shadow-2xl transform scale-95 transition-all duration-300 border border-white">
+            <div class="text-center">
+                <div id="modal_icone" class="mx-auto flex items-center justify-center h-20 w-20 rounded-full mb-6">
+                    <!-- O ícone será injetado pelo JavaScript -->
+                </div>
+                <h3 id="modal_titulo" class="text-2xl font-extrabold text-slate-800 mb-2 tracking-tight"></h3>
+                <p id="modal_mensagem" class="text-slate-500 mb-8 font-medium whitespace-pre-line"></p>
+                <button onclick="fecharModal()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 px-6 rounded-2xl transition-colors shadow-lg shadow-slate-500/30">Entendi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts do Calendário e Validação -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
+    <script>
+        // Inicializa o calendário bonito
+        flatpickr("#nascimento_leitor", {
+            locale: "pt", // Português do Brasil
+            dateFormat: "d/m/Y", // Formato dia/mês/ano
+            disableMobile: "true" // Força o visual bonito mesmo no celular
+        });
+
+        function mostrarAlerta(tipo, titulo, mensagem) {
+            const modal = document.getElementById('modal_alerta');
+            const conteudo = document.getElementById('modal_conteudo');
+            const icone = document.getElementById('modal_icone');
+            
+            document.getElementById('modal_titulo').innerText = titulo;
+            document.getElementById('modal_mensagem').innerText = mensagem;
+
+            if(tipo === 'erro') {
+                icone.className = 'mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-rose-100 text-rose-500 mb-6';
+                icone.innerHTML = `<svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
+            } else {
+                icone.className = 'mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-emerald-100 text-emerald-500 mb-6';
+                icone.innerHTML = `<svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>`;
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            conteudo.classList.remove('scale-95');
+            conteudo.classList.add('scale-100');
+        }
+
+        function fecharModal() {
+            const modal = document.getElementById('modal_alerta');
+            const conteudo = document.getElementById('modal_conteudo');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            conteudo.classList.remove('scale-100');
+            conteudo.classList.add('scale-95');
+        }
+
+        function salvarLeitor() {
+            const nome = document.getElementById('nome_leitor').value;
+            const documento = document.getElementById('documento_leitor').value;
+            const turma = document.getElementById('turma_leitor').value;
+            const nascimento = document.getElementById('nascimento_leitor').value;
+            const status = document.getElementById('status_leitor').value;
+            
+            // Validação rigorosa: Verifica Nome, RA, Turma e Nascimento
+            if(nome.trim() === '' || documento.trim() === '' || turma.trim() === '' || nascimento.trim() === '') {
+                mostrarAlerta('erro', 'Campos Incompletos!', 'Por favor, preencha o Nome, RA/Matrícula, Turma e Data de Nascimento do aluno para realizar o cadastro.');
+                return;
+            }
+            
+            // Texto customizado dependendo do status
+            let mensagemStatus = status === 'ativo' ? '🟢 Liberado para empréstimos.' : '🔴 Bloqueado por pendências.';
+            
+            mostrarAlerta('sucesso', 'Tudo certo!', `O aluno(a) ${nome} foi cadastrado com sucesso. \n\nStatus: ${mensagemStatus}`);
+            document.getElementById('form_leitor').reset();
+        }
+    </script>
+</body>
+</html>
