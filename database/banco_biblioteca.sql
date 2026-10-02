@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `sistema_biblioteca` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `sistema_biblioteca`;
 -- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
 -- Host: localhost    Database: sistema_biblioteca
@@ -55,8 +57,8 @@ CREATE TABLE `emprestimos` (
   `data_devolucao_prevista` date NOT NULL,
   `data_devolucao_real` date DEFAULT NULL,
   `status` varchar(30) DEFAULT 'Em andamento',
-  `valor_multa` decimal(10,2) DEFAULT '0.00',
-  `status_pagamento` varchar(20) DEFAULT 'Sem pendencias',
+  `dias_suspensao` int DEFAULT '0',
+  `status_penalizacao` varchar(30) DEFAULT 'Sem pendencias',
   PRIMARY KEY (`id`),
   KEY `leitor_id` (`leitor_id`),
   KEY `livro_id` (`livro_id`),
@@ -64,7 +66,7 @@ CREATE TABLE `emprestimos` (
   CONSTRAINT `emprestimos_ibfk_1` FOREIGN KEY (`leitor_id`) REFERENCES `leitores` (`id`),
   CONSTRAINT `emprestimos_ibfk_2` FOREIGN KEY (`livro_id`) REFERENCES `livros` (`id`),
   CONSTRAINT `emprestimos_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,6 +75,7 @@ CREATE TABLE `emprestimos` (
 
 LOCK TABLES `emprestimos` WRITE;
 /*!40000 ALTER TABLE `emprestimos` DISABLE KEYS */;
+INSERT INTO `emprestimos` VALUES (2,5,3,1,'2026-10-02','2026-10-09','2026-10-02','Devolvido',0,'Sem pendencias');
 /*!40000 ALTER TABLE `emprestimos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -215,26 +218,6 @@ INSERT INTO `livros_importacao` VALUES (1,'Auau miau piu-piu','Cécile Boyer','B
 UNLOCK TABLES;
 
 --
--- Temporary view structure for view `relatorio_emprestimos`
---
-
-DROP TABLE IF EXISTS `relatorio_emprestimos`;
-/*!50001 DROP VIEW IF EXISTS `relatorio_emprestimos`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `relatorio_emprestimos` AS SELECT 
- 1 AS `codigo_emprestimo`,
- 1 AS `nome_aluno`,
- 1 AS `matricula`,
- 1 AS `titulo_livro`,
- 1 AS `funcionario_responsavel`,
- 1 AS `data_retirada`,
- 1 AS `data_devolucao_prevista`,
- 1 AS `status`,
- 1 AS `valor_multa`*/;
-SET character_set_client = @saved_cs_client;
-
---
 -- Table structure for table `reservas`
 --
 
@@ -299,24 +282,6 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'sistema_biblioteca'
 --
-
---
--- Final view structure for view `relatorio_emprestimos`
---
-
-/*!50001 DROP VIEW IF EXISTS `relatorio_emprestimos`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `relatorio_emprestimos` AS select `e`.`id` AS `codigo_emprestimo`,`leitor`.`nome` AS `nome_aluno`,`leitor`.`matricula` AS `matricula`,`livro`.`titulo` AS `titulo_livro`,`usuario`.`nome` AS `funcionario_responsavel`,`e`.`data_retirada` AS `data_retirada`,`e`.`data_devolucao_prevista` AS `data_devolucao_prevista`,`e`.`status` AS `status`,`e`.`valor_multa` AS `valor_multa` from (((`emprestimos` `e` join `leitores` `leitor` on((`e`.`leitor_id` = `leitor`.`id`))) join `livros` `livro` on((`e`.`livro_id` = `livro`.`id`))) join `usuarios` `usuario` on((`e`.`usuario_id` = `usuario`.`id`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -327,4 +292,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-10-02 13:34:34
+-- Dump completed on 2026-10-02 15:16:04
